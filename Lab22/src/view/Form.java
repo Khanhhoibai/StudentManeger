@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.jar.Attributes.Name;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.Font;
@@ -49,16 +50,12 @@ public class Form extends JFrame {
 	private JRadioButton btnMaSinhVien;
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Form frame = new Form();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		try {
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        new Form().setVisible(true);
+   } catch (Exception e) {
+        e.printStackTrace();
+   }
 	}
 
 	/**
@@ -218,7 +215,7 @@ public class Form extends JFrame {
 	public void showMessage(String message) {
 		JOptionPane.showMessageDialog(this, message);
 	}
-
+//xóa tất cả dữ liệu nhập vào
 	public void clearInput() {
 		this.textNhapDiem.setText("");
 		this.textNhapMaSinhVien.setText("");
@@ -226,7 +223,7 @@ public class Form extends JFrame {
 		this.textNhapNamSinh.setText("");
 		this.textNhapLop.setText("");
 	}
-
+// đưa thông tin vào Jtable
 	public void setTable(List<Student> list) {
 		int size = list.size();
 
@@ -234,13 +231,13 @@ public class Form extends JFrame {
 		for (int i = 0; i < size; i++) {
 			student[i][0] = list.get(i).getId();
 			student[i][1] = list.get(i).getName();
-			student[i][3] = list.get(i).getClas();
 			student[i][2] = list.get(i).getAge();
+			student[i][3] = list.get(i).getClas();
 			student[i][4] = list.get(i).getGpa();
 		}
 		table.setModel(new DefaultTableModel(student, columnNames));
 	}
-
+// in thông tin ra Jtable
 	public void loadTable() {
 		while (true) {
 			DefaultTableModel modelTable = (DefaultTableModel) table.getModel();
@@ -258,7 +255,7 @@ public class Form extends JFrame {
 		this.setTable(service.listStudent);
 
 	}
-
+//Thêm sinh viên vào mảng
 	public void create() {
 		int id = Integer.parseInt(textNhapMaSinhVien.getText());
 		String name = textNhapHovaTen.getText();
@@ -271,7 +268,7 @@ public class Form extends JFrame {
 		clearInput();
 		loadTable();
 	}
-
+//Xóa sinh viên 
 	public void delete() {
 		if (this.btnMaSinhVien.isSelected()) {
 			int id = Integer.parseInt(textNhapMaSinhVien.getText());
@@ -286,22 +283,24 @@ public class Form extends JFrame {
 				this.showMessage("Lop khong ton tai");
 			}
 		}
+		clearInput();
 		loadTable();
 	}
-
+//Tìm kiếm sinh viên
 	public void searchId() {
 		int id = Integer.parseInt(textNhapMaSinhVien.getText());
 		System.out.println(id);
 		service.searchId(id);
+		this.showMessage("Tìm thành công sinh viên");
 		loadTable();
 	}
-
+//Tìm sinh viên có điểm trung bình cao nhất
 	public void searchPoint() {
 		Student student = service.searchPoint();
 		texthienThiTen.setText(student.getName());
 		hienThiDiem.setText(student.getGpa() + "");
 	}
-
+// kiểm tra sinh viên
 	public void check() {
 		try {
 			int id = Integer.parseInt(textNhapMaSinhVien.getText());
@@ -320,12 +319,12 @@ public class Form extends JFrame {
 		}
 		loadTable();
 	}
-
+// hàm mở file
 	private void openFile() {
 		service.listStudent = service.readListStudents();
 		loadTable();
 	}
-
+// hàm lưu file
 	private void saveFile() {
 		service.writeListStudents();
 	}

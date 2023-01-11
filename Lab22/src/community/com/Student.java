@@ -17,7 +17,6 @@ public class Student implements Comparable<Student>, Serializable {
 	private String name;
 	private String clas;
 	private String age;
-	/* điểm trung bình của sinh viên */
 	private double gpa;
 
 	public Student() {

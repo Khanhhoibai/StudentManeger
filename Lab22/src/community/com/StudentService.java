@@ -1,32 +1,21 @@
 package community.com;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.io.*;
+import java.util.*;
+import community.com.*;
 
-import community.com.FileUtils;
-import community.com.Student;
-import community.com.StudentXML;
 
 /**
  * StudentDao class
  * 
  * @author viettuts.vn
  */
+@SuppressWarnings("unused")
 public class StudentService {
-//	private static final String STUDENT_FILE_NAME = "student.xml";
+
 	public List<Student> listStudent = new ArrayList<>();
 
+	// viết ra file txt
 	public void writeListStudents() {
 		try {
 			FileUtils.write(listStudent);
@@ -37,6 +26,7 @@ public class StudentService {
 		}
 	}
 
+	//đọc file từ txt
 	public List<Student> readListStudents() {
 		List<Student> list = null;
 		try {

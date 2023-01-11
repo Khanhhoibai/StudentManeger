@@ -51,40 +51,5 @@ public class FileUtils {
 		}
 		return students;
 	}
-//
-//	public static void write(List<Student> studentList) {
-//		FileOutputStream fos = null;
-//		ObjectOutputStream oos = null;
-//		try {
-//			fos = new FileOutputStream(new File(STUDENT_FILE_NAME));
-//			oos = new ObjectOutputStream(fos);
-//			oos.writeObject(studentList);
-//			oos.close();
-//			fos.close();
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//
-//	public static List<Student> read() {
-//		List<Student> studentList = new ArrayList<>();
-//		FileInputStream fis = null;
-//		ObjectInputStream ois = null;
-//		try {
-//			fis = new FileInputStream(new File(STUDENT_FILE_NAME));
-//			ois = new ObjectInputStream(fis);
-//			studentList = (List<Student>) ois.readObject();
-//			ois.close();
-//			fis.close();
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		return studentList;
-//	}
+
 }
